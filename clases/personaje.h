@@ -1,11 +1,16 @@
 #include <string>
+#include "posicion.h"
 
 class Personaje{
-    Personaje::Personaje(std::string, int, int, int, Posicion);
-
-    int ataque();
-
-    void recibirAtaque(Personaje*);
-
-    void moverse(); //Que tipo tiene que ser? (void para que funcionara nomas)
+    private:
+        std::string nombre;
+        int vida;
+        int daño;
+        int velocidad;
+        Posicion pos;
+    public:
+        Personaje(std::string, int, int, int, Posicion);
+        int ataque();
+        void recibirAtaque(Personaje*);
+        void moverse(); //Que tipo tiene que ser? (void para que funcionara nomas)
 };
