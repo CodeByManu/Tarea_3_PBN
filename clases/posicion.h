@@ -1,5 +1,6 @@
-
 class Posicion{
+    Posicion(int, int);
+
     int getX();
 
     int getY();

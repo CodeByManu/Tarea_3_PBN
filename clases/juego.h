@@ -1,6 +1,8 @@
 #include "personaje.h"
 
 class Juego{
+    Juego::Juego();
+
     void jugar();
 
     void chequearGanador();
@@ -9,5 +11,5 @@ class Juego{
 
     void mostrarMapa();
 
-    void combate(Personaje, Personaje);
+    void combate(Personaje*, Personaje*);
 };

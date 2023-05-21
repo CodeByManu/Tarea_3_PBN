@@ -1,7 +1,9 @@
 #include "mapa.h"
 
-void crearMapa(int ancho, int alto) {}
+Mapa::Mapa(int ancho, int alto) {}
 
-void agregarPersonaje(Personaje *personaje) {}
+void Mapa::crearMapa(int ancho, int alto) {}
 
-void eliminarPersonaje(Personaje *personaje) {}
+void Mapa::agregarPersonaje(Personaje *personaje) {}
+
+void Mapa::eliminarPersonaje(Personaje *personaje) {}

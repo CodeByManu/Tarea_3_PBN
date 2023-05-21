@@ -1,11 +1,13 @@
 #include "juego.h"
 
-void jugar() {}
+Juego::Juego() {}
 
-void chequearGanador() {}
+void Juego::jugar() {}
 
-int calcularTurno() {}
+void Juego::chequearGanador() {}
 
-void mostrarMapa() {}
+int Juego::calcularTurno() {}
 
-void combate(Personaje *p1, Personaje *p2) {}
+void Juego::mostrarMapa() {}
+
+void Juego::combate(Personaje *p1, Personaje *p2) {}

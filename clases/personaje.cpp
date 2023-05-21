@@ -1,7 +1,10 @@
 #include "personaje.h"
+#include "posicion.h"
 
-int ataque() {}
+Personaje::Personaje(std::string nombre, int vida, int ataque, int velocidad, Posicion pos) {}
 
-void recibirAtaque() {}
+int Personaje::ataque() {}
 
-void moverse() {}
+void Personaje::recibirAtaque(Personaje *enemigo) {}
+
+void Personaje::moverse() {}

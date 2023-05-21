@@ -31,7 +31,10 @@
 *.out
 *.app
 
+#VS Code
+*.vscode
+*.code-workspace
+
 # Otros
 *.pdf
-*.code-workspace
 *.jpg

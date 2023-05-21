@@ -1,7 +1,9 @@
 #include "posicion.h"
 
-int getX() {}
+Posicion::Posicion(int x, int y) {}
 
-int getY() {}
+int Posicion::getX() {}
 
-void set(int x, int y) {}
+int Posicion::getY() {}
+
+void Posicion::set(int x, int y) {}
