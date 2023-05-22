@@ -4,7 +4,7 @@ class Juego{
     private:
         // atributos (?)
     public:
-        Juego::Juego();
+        Juego();
         void jugar();
         void chequearGanador();
         int calcularTurno();

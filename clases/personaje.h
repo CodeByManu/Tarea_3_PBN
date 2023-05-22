@@ -9,6 +9,7 @@ class Personaje{
         int velocidad;
         Posicion pos;
     public:
+        Personaje();
         Personaje(std::string, int, int, int, Posicion);
         int ataque();
         void recibirAtaque(Personaje*);
