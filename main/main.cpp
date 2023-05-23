@@ -2,8 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "../clases/personaje.h"
-// #include "../clases/mapa.h"
+// #include "../clases/personaje.h"
+#include "../clases/mapa.h"
 
 using namespace std;
 
@@ -18,7 +18,15 @@ int main() {
     // Tablero
     getline(soldados, tx, ','); int x = stoi(tx);
     getline(soldados, ty); int y = stoi(ty);
-    // Mapa tablero(x, y);
+    Mapa tablero(x, y);
+    tablero.crearMapa(x, y);
+    
+    for(int i = 0; i < y*2; i++){
+        for(int j = 0; j < x; j++){
+            cout << tablero.tablero[y][x] << "|";
+        }
+        cout << endl;
+    }
     
     soldados >> n1;
     Personaje ejercito1[n1];
@@ -38,7 +46,7 @@ int main() {
         // ubicar personaje en mapa
 
     }
-    
+
     soldados >> n2;
     Personaje ejercito2[n2];
     for (int i = 0; i < n1; i++) {
