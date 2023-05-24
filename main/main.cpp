@@ -48,7 +48,7 @@ int main() {
         Posicion coord(px, py);
         ejercito1[i] = Personaje(nombre, vida, daño, velocidad, coord);
         // ubicar personaje en mapa
-        tablero.agregarPersonaje(ejercito1[i]);
+        // tablero.agregarPersonaje(ejercito1[i]);
     }
 
     soldados >> n2;
@@ -67,7 +67,7 @@ int main() {
         Posicion coord(px, py);
         ejercito2[i] = Personaje(nombre, vida, daño, velocidad, coord);
         // ubicar personaje en mapa
-        tablero.agregarPersonaje(ejercito2[i]);
+        // tablero.agregarPersonaje(ejercito2[i]);
     }
 
     // tablero.agregarPersonaje(ejercito1[0]);

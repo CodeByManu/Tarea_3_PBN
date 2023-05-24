@@ -8,7 +8,7 @@ class Mapa {
         std::string **tablero;
         Mapa(int, int);
         void crearMapa(int, int);
-        void agregarPersonaje(Personaje);
+        void agregarPersonaje(Personaje*);
         void eliminarPersonaje(Personaje*);
         ~Mapa();
 };
