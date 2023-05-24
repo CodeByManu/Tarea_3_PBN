@@ -21,3 +21,11 @@ void Personaje::recibirAtaque(Personaje *enemigo) {
 void Personaje::moverse() {
     // TODO
 }
+
+Posicion Personaje::getPos() {
+    return pos;
+}
+
+std::string Personaje::getNombre() {
+    return nombre;
+}

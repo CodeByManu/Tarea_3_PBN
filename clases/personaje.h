@@ -14,4 +14,6 @@ class Personaje{
         int ataque();
         void recibirAtaque(Personaje*);
         void moverse(); //Que tipo tiene que ser? (void para que funcionara nomas)
+        Posicion getPos();
+        std::string getNombre();
 };

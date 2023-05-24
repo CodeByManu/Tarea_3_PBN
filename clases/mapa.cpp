@@ -17,12 +17,18 @@ void Mapa::crearMapa(int ancho, int alto) {
 
     for (int y = 0; y < alto*2; y++) {
         for (int x = 0; x < ancho; x++){
-            tablero[x][y] = "_____";
+            if (y%2 == 0) tablero[x][y] = "     ";
+            else tablero [x][y] = "_____";
         }
     }
 }
 
-void Mapa::agregarPersonaje(Personaje *personaje) {}
+void Mapa::agregarPersonaje(Personaje personaje) {
+    Posicion pos = personaje.getPos();
+    int espacios = 5 - personaje.getNombre().length();
+
+    tablero[pos.getX() - 1][pos.getY()*2] = personaje.getNombre() + std::string(espacios, ' ');
+}
 
 void Mapa::eliminarPersonaje(Personaje *personaje) {}
 

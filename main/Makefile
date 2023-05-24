@@ -29,4 +29,4 @@ $(source).o: $(source).cpp
 
 
 clean:
-	rm -f *.o $(name)
+	del -f *.o $(name).exe

@@ -21,12 +21,15 @@ int main() {
     Mapa tablero(x, y);
     tablero.crearMapa(x, y);
     
+    cout << " _____ _____ _____ _____ _____ _____ _____" << endl;
     for(int i = 0; i < y*2; i++){
+        cout << '|';
         for(int j = 0; j < x; j++){
-            cout << tablero.tablero[y][x] << "|";
+            cout << tablero.tablero[j][i] << '|';
         }
         cout << endl;
     }
+
     
     soldados >> n1;
     Personaje ejercito1[n1];
@@ -44,7 +47,7 @@ int main() {
         Posicion coord(px, py);
         ejercito1[i] = Personaje(nombre, vida, daño, velocidad, coord);
         // ubicar personaje en mapa
-
+        // tablero.agregarPersonaje(ejercito1[i]);
     }
 
     soldados >> n2;
@@ -63,6 +66,19 @@ int main() {
         Posicion coord(px, py);
         ejercito2[i] = Personaje(nombre, vida, daño, velocidad, coord);
         // ubicar personaje en mapa
+        // tablero.agregarPersonaje(ejercito2[i]);
+    }
+
+    tablero.agregarPersonaje(ejercito1[0]);
+    tablero.agregarPersonaje(ejercito2[0]);
+
+    cout << " _____ _____ _____ _____ _____ _____ _____" << endl;
+    for(int i = 0; i < y*2; i++){
+        cout << '|';
+        for(int j = 0; j < x; j++){
+            cout << tablero.tablero[j][i] << '|';
+        }
+        cout << endl;
     }
 
     soldados.close();
