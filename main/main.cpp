@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 // #include "../clases/personaje.h"
 #include "../clases/mapa.h"
 
@@ -37,7 +38,7 @@ int main() {
         string linea, nombre;
         int vida, daño, velocidad, px, py;
 
-        getline(soldados, linea, ','); nombre = linea;
+        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.cend()); nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); daño = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
@@ -47,7 +48,7 @@ int main() {
         Posicion coord(px, py);
         ejercito1[i] = Personaje(nombre, vida, daño, velocidad, coord);
         // ubicar personaje en mapa
-        // tablero.agregarPersonaje(ejercito1[i]);
+        tablero.agregarPersonaje(ejercito1[i]);
     }
 
     soldados >> n2;
@@ -56,7 +57,7 @@ int main() {
         string linea, nombre;
         int vida, daño, velocidad, px, py;
 
-        getline(soldados, linea, ','); nombre = linea;
+        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.cend()); nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); daño = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
@@ -66,20 +67,22 @@ int main() {
         Posicion coord(px, py);
         ejercito2[i] = Personaje(nombre, vida, daño, velocidad, coord);
         // ubicar personaje en mapa
-        // tablero.agregarPersonaje(ejercito2[i]);
+        tablero.agregarPersonaje(ejercito2[i]);
     }
 
-    tablero.agregarPersonaje(ejercito1[0]);
-    tablero.agregarPersonaje(ejercito2[0]);
+    // tablero.agregarPersonaje(ejercito1[0]);
+    // tablero.agregarPersonaje(ejercito2[0]);
 
     cout << " _____ _____ _____ _____ _____ _____ _____" << endl;
     for(int i = 0; i < y*2; i++){
         cout << '|';
         for(int j = 0; j < x; j++){
-            cout << tablero.tablero[j][i] << '|';
+            if (i == 2 && j == 2) cout << "test |";
+            else cout << tablero.tablero[j][i] << '|';
         }
         cout << endl;
     }
+    cout << ejercito1[0].getNombre() << endl;
 
     soldados.close();
     return 0;

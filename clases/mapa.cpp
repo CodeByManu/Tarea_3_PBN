@@ -27,7 +27,7 @@ void Mapa::agregarPersonaje(Personaje personaje) {
     Posicion pos = personaje.getPos();
     int espacios = 5 - personaje.getNombre().length();
 
-    tablero[pos.getX() - 1][pos.getY()*2] = personaje.getNombre() + std::string(espacios, ' ');
+    tablero[pos.getX() - 1][pos.getY()*2 - 1] = personaje.getNombre() + std::string(espacios, ' ');
 }
 
 void Mapa::eliminarPersonaje(Personaje *personaje) {}
