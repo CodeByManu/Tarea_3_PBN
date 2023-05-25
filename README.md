@@ -1,5 +1,16 @@
 # **Tarea_3_PBN**
 
+## **TODO`s:**
+- ### **Personaje:**
+    - moverse( )
+- ### **Juego:**
+    - jugar( )
+    - chequearGanador( )
+    - calcularTurno( )
+    - combate( )
+
+---
+
 ## **Clases:**
 
 - **Posicion:** int x, int y

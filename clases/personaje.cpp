@@ -18,7 +18,7 @@ void Personaje::recibirAtaque(Personaje *enemigo) {
     vida -= enemigo -> daño;
 }
 
-void Personaje::moverse() {
+Posicion Personaje::moverse() {
     // TODO
 }
 

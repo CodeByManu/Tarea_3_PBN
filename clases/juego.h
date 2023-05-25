@@ -1,8 +1,10 @@
-#include "personaje.h"
+#include "mapa.h"
 
 class Juego{
     private:
-        // atributos (?)
+        Mapa tablero;
+        int ancho;
+        int alto;
     public:
         Juego();
         void jugar();
@@ -10,4 +12,5 @@ class Juego{
         int calcularTurno();
         void mostrarMapa();
         void combate(Personaje*, Personaje*);
+        void setMapa(Mapa*); // Se puede?
 };

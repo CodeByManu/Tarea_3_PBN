@@ -1,15 +1,14 @@
 #include <string>
 #include "mapa.h"
 
+Mapa::Mapa() {}
+
 Mapa::Mapa(int ancho, int alto) {
     this -> ancho = ancho;
     this -> alto = alto;
 }
-// Diferencia entre constructor y crearMapa??
-void Mapa::crearMapa(int ancho, int alto) {
-// _____ -> Jose_ (nombre)
-// _____ -> __1__ (# ejercito)
-    
+
+void Mapa::crearMapa(int ancho, int alto) {    
     tablero = new std::string*[ancho];
     for (int i = 0; i < ancho; i++) {
         tablero[i] = new std::string[alto*2];
@@ -23,14 +22,27 @@ void Mapa::crearMapa(int ancho, int alto) {
     }
 }
 
-void Mapa::agregarPersonaje(Personaje *personaje) {
+void Mapa::agregarPersonaje(Personaje *personaje, std::string n) {
     Posicion pos = personaje -> getPos();
     int espacios = 5 - personaje -> getNombre().length();
 
-    tablero[pos.getX() - 1][pos.getY()*2 - 1] = personaje -> getNombre() + std::string(espacios, ' ');
+    tablero[pos.getX()][pos.getY()*2] = personaje -> getNombre() + std::string(espacios, ' ');
+    tablero[pos.getX()][pos.getY()*2 + 1] = "__" + n + "__";
 }
 
-void Mapa::eliminarPersonaje(Personaje *personaje) {}
+void Mapa::eliminarPersonaje(Personaje *personaje) {
+    Posicion pos = personaje -> getPos();
+    tablero[pos.getX()][pos.getY()*2] = "     ";
+    tablero[pos.getX()][pos.getY()*2 + 1] = "_____";
+}
+
+int Mapa::getAncho() {
+    return ancho;
+}
+
+int Mapa::getAlto() {
+    return alto;
+}
 
 Mapa::~Mapa(){
     for (int i = 0; i < ancho; i++) {
