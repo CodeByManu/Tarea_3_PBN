@@ -4,7 +4,7 @@
 #include <sstream>
 #include <algorithm>
 // #include "../clases/personaje.h"
-#include "../clases/mapa.h"
+#include "../clases/juego.h"
 
 using namespace std;
 
@@ -14,26 +14,17 @@ int main() {
     int n1, n2;
     string tx, ty;
 
-    soldados.open("../input-data/soldados_short.txt");
+    soldados.open("../input-data/soldados.txt");
 
     // Tablero
     getline(soldados, tx, ','); int x = stoi(tx);
     getline(soldados, ty); int y = stoi(ty);
-    Mapa tablero(x, y);
-    tablero.crearMapa(x, y);
+    Mapa *tablero = new Mapa(x, y);
+    tablero -> crearMapa(x, y);
     
-    cout << " _____ _____ _____ _____ _____ _____ _____" << endl;
-    for(int i = 0; i < y*2; i++){
-        cout << '|';
-        for(int j = 0; j < x; j++){
-            cout << tablero.tablero[j][i] << '|';
-        }
-        cout << endl;
-    }
-
-    
+    // Ejercito 1
     soldados >> n1;
-    Personaje ejercito1[n1];
+    Personaje **ejercito1 = new Personaje*[n1];
     for (int i = 0; i < n1; i++) {
         string linea, nombre;
         int vida, daño, velocidad, px, py;
@@ -46,13 +37,13 @@ int main() {
         getline(soldados, linea); py = stoi(linea);
         
         Posicion coord(px, py);
-        ejercito1[i] = Personaje(nombre, vida, daño, velocidad, coord);
-        // ubicar personaje en mapa
-        // tablero.agregarPersonaje(ejercito1[i]);
+        ejercito1[i] = new Personaje(nombre, vida, daño, velocidad, coord);
+        tablero -> agregarPersonaje(ejercito1[i], "1");
     }
 
+    // Ejercito 2
     soldados >> n2;
-    Personaje ejercito2[n2];
+    Personaje **ejercito2 = new Personaje*[n2];
     for (int i = 0; i < n1; i++) {
         string linea, nombre;
         int vida, daño, velocidad, px, py;
@@ -65,24 +56,18 @@ int main() {
         getline(soldados, linea); py = stoi(linea);
         
         Posicion coord(px, py);
-        ejercito2[i] = Personaje(nombre, vida, daño, velocidad, coord);
-        // ubicar personaje en mapa
-        // tablero.agregarPersonaje(ejercito2[i]);
+        ejercito2[i] = new Personaje(nombre, vida, daño, velocidad, coord);
+        tablero -> agregarPersonaje(ejercito2[i], "2");
     }
 
-    // tablero.agregarPersonaje(ejercito1[0]);
-    // tablero.agregarPersonaje(ejercito2[0]);
+    Juego juego;
+    juego.setMapa(tablero);
+    juego.mostrarMapa();
 
-    cout << " _____ _____ _____ _____ _____ _____ _____" << endl;
-    for(int i = 0; i < y*2; i++){
-        cout << '|';
-        for(int j = 0; j < x; j++){
-            if (i == 2 && j == 2) cout << "test |";
-            else cout << tablero.tablero[j][i] << '|';
-        }
-        cout << endl;
-    }
-    cout << ejercito1[0].getNombre() << endl;
+    // tablero.eliminarPersonaje(ejercito1[0]);
+
+    for (int i = 0; i < n1; i++) delete ejercito1[i];
+    delete[] ejercito1;
 
     soldados.close();
     return 0;
