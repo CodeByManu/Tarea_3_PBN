@@ -1,9 +1,8 @@
-// #include "../clases/hfiles.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-// #include "../clases/personaje.h"
+
 #include "../clases/juego.h"
 
 using namespace std;
@@ -13,7 +12,7 @@ int main() {
     ifstream soldados;
     int n1, n2;
     string tx, ty;
-
+    
     soldados.open("../input-data/soldados.txt");
 
     // Tablero
@@ -28,8 +27,9 @@ int main() {
     for (int i = 0; i < n1; i++) {
         string linea, nombre;
         int vida, daño, velocidad, px, py;
-
-        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.cend()); nombre = linea;
+        //remove() lleva al final todos los elementos que se quieren borrar y retorna un iterador
+        //.erase borra todo lo que se le entrega, pero de parametros recibe iteradores, por eso el buen funcionamiento del modismo remove-erase
+        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.end()); nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); daño = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
@@ -48,7 +48,7 @@ int main() {
         string linea, nombre;
         int vida, daño, velocidad, px, py;
 
-        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.cend()); nombre = linea;
+        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.end()); nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); daño = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
@@ -63,6 +63,8 @@ int main() {
     Juego juego;
     juego.setMapa(tablero);
     juego.mostrarMapa();
+
+    juego.combate(ejercito1[0], ejercito2[0]);
 
     // tablero.eliminarPersonaje(ejercito1[0]);
 

@@ -1,4 +1,5 @@
 #include <string>
+
 #include "posicion.h"
 
 class Personaje{
@@ -14,6 +15,9 @@ class Personaje{
         int ataque();
         void recibirAtaque(Personaje*);
         Posicion moverse();
-        Posicion getPos();
         std::string getNombre();
+        int getVida();
+        int getDaño();
+        int getVelocidad();
+        Posicion getPos();
 };

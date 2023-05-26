@@ -7,7 +7,7 @@
     - jugar( )
     - chequearGanador( )
     - calcularTurno( )
-    - combate( )
+    - ~~combate( )~~
 
 ---
 

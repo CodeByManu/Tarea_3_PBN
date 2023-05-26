@@ -3,8 +3,11 @@
 class Juego{
     private:
         Mapa tablero;
+        Personaje **equipo1;
+        Personaje **equipo2;
         int ancho;
         int alto;
+        void combateDes(Personaje*, Personaje*);
     public:
         Juego();
         void jugar();

@@ -19,13 +19,27 @@ void Personaje::recibirAtaque(Personaje *enemigo) {
 }
 
 Posicion Personaje::moverse() {
-    // TODO
-}
-
-Posicion Personaje::getPos() {
-    return pos;
+    int x = pos.getX();
+    int y = pos.getY();
+    // if ((x && y) != )
 }
 
 std::string Personaje::getNombre() {
     return nombre;
+}
+
+int Personaje::getVida() {
+    return vida;
+}
+
+int Personaje::getDaño() {
+    return daño;
+}
+
+int Personaje::getVelocidad() {
+    return velocidad;
+}
+
+Posicion Personaje::getPos() {
+    return pos;
 }
