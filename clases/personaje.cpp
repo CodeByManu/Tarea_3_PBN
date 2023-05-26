@@ -2,20 +2,20 @@
 
 Personaje::Personaje():pos{pos} {}
 
-Personaje::Personaje(std::string nombre, int vida, int daño, int velocidad, Posicion pos):pos{pos}
+Personaje::Personaje(std::string nombre, int vida, int danio, int velocidad, Posicion pos):pos{pos}
 { //Debido a que pos no tiene constructor predeterminado (lo hicimos nosotros)
     this -> nombre = nombre;
     this -> vida = vida;
-    this -> daño = daño;
+    this -> danio = danio;
     this -> velocidad = velocidad;
 }
 
 int Personaje::ataque() {
-    return daño;
+    return danio;
 }
 
 void Personaje::recibirAtaque(Personaje *enemigo) {
-    vida -= enemigo -> daño;
+    vida -= enemigo -> danio;
 }
 
 Posicion Personaje::moverse() {
@@ -32,8 +32,8 @@ int Personaje::getVida() {
     return vida;
 }
 
-int Personaje::getDaño() {
-    return daño;
+int Personaje::getDanio() {
+    return danio;
 }
 
 int Personaje::getVelocidad() {

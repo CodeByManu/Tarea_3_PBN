@@ -42,14 +42,14 @@ void Juego::combate(Personaje *p1, Personaje *p2) {
 void Juego::combateDes(Personaje *primero, Personaje *segundo) {
     std::cout << ", comienza atacando " << primero -> getNombre() << std::endl;
     while ((primero -> getVida() | segundo -> getVida()) > 0){
-        std::cout << primero -> getNombre() << " inflinge " << primero -> getDaño() << " de daño a " << segundo -> getNombre();
+        std::cout << primero -> getNombre() << " inflinge " << primero -> getDanio() << " de daño a " << segundo -> getNombre();
         segundo -> recibirAtaque(primero);
         if (segundo -> getVida() <= 0) {
             std::cout << ", vida restante: 0" << std::endl;
             break;
         }
         else std::cout << ", vida restante: " << segundo -> getVida() << std::endl;
-        std::cout << segundo -> getNombre() << " inflinge " << segundo -> getDaño() << " de daño a " << primero -> getNombre();
+        std::cout << segundo -> getNombre() << " inflinge " << segundo -> getDanio() << " de daño a " << primero -> getNombre();
         primero -> recibirAtaque(segundo);
         if (primero -> getVida() <= 0) {
             std::cout << ", vida restante: 0" << std::endl;

@@ -26,18 +26,18 @@ int main() {
     Personaje **ejercito1 = new Personaje*[n1];
     for (int i = 0; i < n1; i++) {
         string linea, nombre;
-        int vida, daño, velocidad, px, py;
+        int vida, danio, velocidad, px, py;
         //remove() lleva al final todos los elementos que se quieren borrar y retorna un iterador
         //.erase borra todo lo que se le entrega, pero de parametros recibe iteradores, por eso el buen funcionamiento del modismo remove-erase
         getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.end()); nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
-        getline(soldados, linea, ','); daño = stoi(linea);
+        getline(soldados, linea, ','); danio = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
         getline(soldados, linea, ','); px = stoi(linea);
         getline(soldados, linea); py = stoi(linea);
         
         Posicion coord(px, py);
-        ejercito1[i] = new Personaje(nombre, vida, daño, velocidad, coord);
+        ejercito1[i] = new Personaje(nombre, vida, danio, velocidad, coord);
         tablero -> agregarPersonaje(ejercito1[i], "1");
     }
 
@@ -46,17 +46,17 @@ int main() {
     Personaje **ejercito2 = new Personaje*[n2];
     for (int i = 0; i < n1; i++) {
         string linea, nombre;
-        int vida, daño, velocidad, px, py;
+        int vida, danio, velocidad, px, py;
 
         getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.end()); nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
-        getline(soldados, linea, ','); daño = stoi(linea);
+        getline(soldados, linea, ','); danio = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
         getline(soldados, linea, ','); px = stoi(linea);
         getline(soldados, linea); py = stoi(linea);
         
         Posicion coord(px, py);
-        ejercito2[i] = new Personaje(nombre, vida, daño, velocidad, coord);
+        ejercito2[i] = new Personaje(nombre, vida, danio, velocidad, coord);
         tablero -> agregarPersonaje(ejercito2[i], "2");
     }
 

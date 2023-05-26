@@ -6,7 +6,7 @@ class Personaje{
     private:
         std::string nombre;
         int vida;
-        int daño;
+        int danio;
         int velocidad;
         Posicion pos;
     public:
@@ -17,7 +17,7 @@ class Personaje{
         Posicion moverse();
         std::string getNombre();
         int getVida();
-        int getDaño();
+        int getDanio();
         int getVelocidad();
         Posicion getPos();
 };
