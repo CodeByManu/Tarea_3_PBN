@@ -70,13 +70,9 @@ int main() {
     juego.setMapa(tablero);
     juego.mostrarMapa();
 
-    cout << ejercito2[2] -> getPos().getX() << ejercito2[2] -> getPos().getY() << tablero -> getCentro().getY() << endl;
-    ejercito2[2] -> moverse();
-    tablero -> agregarPersonaje(ejercito2[2]);
+    ejercito1[20] -> moverse();
 
     juego.mostrarMapa();
-
-    juego.combate(ejercito1[0], ejercito2[0]);
 
     // tablero -> eliminarPersonaje(ejercito1[0]);
 

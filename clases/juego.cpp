@@ -79,3 +79,11 @@ void Juego::setMapa(Mapa *tablero) {
     alto = tablero -> getAlto();
 }
 
+Personaje* Juego::llamarEnemigo(int x, int y, Personaje **equipo, int n) {
+    for (int i = 0; i < n; i++){
+        if (equipo[i] -> getPos().getX() == x && equipo[i] -> getPos().getY() == y) {
+            std::cout << "Enemigo encontrado: " << equipo[i] -> getNombre() << std::endl;
+            return equipo[i];
+        }
+    }
+}
