@@ -56,7 +56,11 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
         std::cout << primero -> getNombre() << " inflinge " << primero -> getDanio() << " de daño a " << segundo -> getNombre();
         segundo -> recibirAtaque(primero);
         if (segundo -> getVida() <= 0) {
+            std::cout << "test - Max" << std::endl;
             std::cout << ", vida restante: 0" << std::endl;
+            tablero -> eliminarPersonaje(segundo);
+            segundo -> matar(segundo);
+            tablero -> agregarPersonaje(primero);
             break;
         }
         else std::cout << ", vida restante: " << segundo -> getVida() << std::endl;
@@ -64,6 +68,10 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
         primero -> recibirAtaque(segundo);
         if (primero -> getVida() <= 0) {
             std::cout << ", vida restante: 0" << std::endl;
+            tablero -> eliminarPersonaje(primero);
+            primero -> matar(primero);
+            tablero -> agregarPersonaje(segundo);
+
             break;
         }
         else std::cout << ", vida restante: " << primero -> getVida() << std::endl;
@@ -79,9 +87,9 @@ void Juego::setMapa(Mapa *tablero) {
     alto = tablero -> getAlto();
 }
 
-Personaje* Juego::llamarEnemigo(int x, int y, Personaje **equipo, int n) {
+Personaje* Juego::llamarEnemigo(Posicion pos, Personaje **equipo, int n) {
     for (int i = 0; i < n; i++){
-        if (equipo[i] -> getPos().getX() == x && equipo[i] -> getPos().getY() == y) {
+        if (equipo[i] -> getPos().getX() == pos.getX() && equipo[i] -> getPos().getY() == pos.getY()) {
             std::cout << "Enemigo encontrado: " << equipo[i] -> getNombre() << std::endl;
             return equipo[i];
         }

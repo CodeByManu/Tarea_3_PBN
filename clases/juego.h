@@ -17,5 +17,5 @@ class Juego{
         void mostrarMapa();
         void combate(Personaje*, Personaje*);
         void setMapa(Mapa*); // Se puede?
-        Personaje* llamarEnemigo(int, int, Personaje**, int n);
+        Personaje* llamarEnemigo(Posicion, Personaje**, int n);
 };

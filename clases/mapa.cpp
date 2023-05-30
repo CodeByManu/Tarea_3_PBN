@@ -30,9 +30,9 @@ void Mapa::agregarPersonaje(Personaje *personaje) {
     tablero[pos.getX()][pos.getY()*2 + 1] = "__" + personaje -> ejercito + "__";
 }
 
-void Mapa::eliminarPersonaje(int x, int y) {
-    tablero[x][y*2] = "     ";
-    tablero[x][y*2 + 1] = "_____";
+void Mapa::eliminarPersonaje(Personaje* personaje) {
+    tablero[personaje -> getPos().getX()][personaje -> getPos().getY()*2] = "     ";
+    tablero[personaje -> getPos().getX()][personaje -> getPos().getY()*2 + 1] = "_____";
 }
 
 int Mapa::getAncho() {

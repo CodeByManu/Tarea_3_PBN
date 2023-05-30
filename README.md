@@ -1,8 +1,6 @@
 # **Tarea_3_PBN**
 
 ## **TODO`s:**
-- ### **Personaje:**
-    - moverse( )
 - ### **Juego:**
     - jugar( )
     - chequearGanador( )

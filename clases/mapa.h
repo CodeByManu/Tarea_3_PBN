@@ -16,7 +16,7 @@ class Mapa {
         Mapa(int, int);
         void crearMapa(int, int);
         void agregarPersonaje(Personaje*);
-        void eliminarPersonaje(int, int);
+        void eliminarPersonaje(Personaje*);
         int getAncho();
         int getAlto();
         void setCentro(Posicion);

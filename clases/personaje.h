@@ -14,10 +14,13 @@ class Personaje{
         int vida;
         int danio;
         int velocidad;
-        Posicion pos;
         Mapa *tablero;
+
     public:
+        Posicion pos;
         std::string ejercito; //Publico o privado?
+        std::string estado = "vivo";
+        int combatePendiente = 0;
         Personaje();
         Personaje(std::string, int, int, int, Posicion);
         int ataque();
@@ -29,6 +32,8 @@ class Personaje{
         int getVelocidad();
         Posicion getPos();
         void setMapa(Mapa*);
+        void matar(Personaje*);
+        ~Personaje();
 };
 
 #endif
