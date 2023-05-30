@@ -20,6 +20,8 @@ int main() {
     getline(soldados, ty); int y = stoi(ty);
     Mapa *tablero = new Mapa(x, y);
     tablero -> crearMapa(x, y);
+    Posicion centro((tablero -> getAncho())/2, (tablero -> getAlto()-1));
+    tablero -> setCentro(centro);
     
     // Ejercito 1
     soldados >> n1;
@@ -38,7 +40,9 @@ int main() {
         
         Posicion coord(px, py);
         ejercito1[i] = new Personaje(nombre, vida, danio, velocidad, coord);
-        tablero -> agregarPersonaje(ejercito1[i], "1");
+        ejercito1[i] -> ejercito = "1";
+        ejercito1[i] -> setMapa(tablero); //factible? o mejor crear coordenada centro x c/personaje?
+        tablero -> agregarPersonaje(ejercito1[i]);
     }
 
     // Ejercito 2
@@ -57,16 +61,24 @@ int main() {
         
         Posicion coord(px, py);
         ejercito2[i] = new Personaje(nombre, vida, danio, velocidad, coord);
-        tablero -> agregarPersonaje(ejercito2[i], "2");
+        ejercito2[i] -> ejercito = "2";
+        ejercito2[i] -> setMapa(tablero);
+        tablero -> agregarPersonaje(ejercito2[i]);
     }
 
     Juego juego;
     juego.setMapa(tablero);
     juego.mostrarMapa();
 
+    cout << ejercito2[2] -> getPos().getX() << ejercito2[2] -> getPos().getY() << tablero -> getCentro().getY() << endl;
+    ejercito2[2] -> moverse();
+    tablero -> agregarPersonaje(ejercito2[2]);
+
+    juego.mostrarMapa();
+
     juego.combate(ejercito1[0], ejercito2[0]);
 
-    // tablero.eliminarPersonaje(ejercito1[0]);
+    // tablero -> eliminarPersonaje(ejercito1[0]);
 
     for (int i = 0; i < n1; i++) delete ejercito1[i];
     delete[] ejercito1;

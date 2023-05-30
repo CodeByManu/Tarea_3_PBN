@@ -22,12 +22,12 @@ void Mapa::crearMapa(int ancho, int alto) {
     }
 }
 
-void Mapa::agregarPersonaje(Personaje *personaje, std::string n) {
+void Mapa::agregarPersonaje(Personaje *personaje) {
     Posicion pos = personaje -> getPos();
     int espacios = 5 - personaje -> getNombre().length();
 
     tablero[pos.getX()][pos.getY()*2] = personaje -> getNombre() + std::string(espacios, ' ');
-    tablero[pos.getX()][pos.getY()*2 + 1] = "__" + n + "__";
+    tablero[pos.getX()][pos.getY()*2 + 1] = "__" + personaje -> ejercito + "__";
 }
 
 void Mapa::eliminarPersonaje(Personaje *personaje) {
@@ -42,6 +42,14 @@ int Mapa::getAncho() {
 
 int Mapa::getAlto() {
     return alto;
+}
+
+void Mapa::setCentro(Posicion centro) {
+    this -> centro = centro;
+}
+
+Posicion Mapa::getCentro() {
+    return centro;
 }
 
 Mapa::~Mapa(){

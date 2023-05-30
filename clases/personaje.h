@@ -1,6 +1,12 @@
+#ifndef PERSONAJE_H
+#define PERSONAJE_H
+
 #include <string>
 
 #include "posicion.h"
+#include "mapa.h"
+
+class Mapa;
 
 class Personaje{
     private:
@@ -9,7 +15,9 @@ class Personaje{
         int danio;
         int velocidad;
         Posicion pos;
+        Mapa *tablero;
     public:
+        std::string ejercito; //Publico o privado?
         Personaje();
         Personaje(std::string, int, int, int, Posicion);
         int ataque();
@@ -20,4 +28,7 @@ class Personaje{
         int getDanio();
         int getVelocidad();
         Posicion getPos();
+        void setMapa(Mapa*);
 };
+
+#endif

@@ -1,17 +1,27 @@
+#ifndef MAPA_H
+#define MAPA_H
+
 #include "personaje.h"
+
+class Personaje;
 
 class Mapa {
     private:
         int ancho;
         int alto;
+        Posicion centro;
     public:
         std::string **tablero;
         Mapa();
         Mapa(int, int);
         void crearMapa(int, int);
-        void agregarPersonaje(Personaje*, std::string); // Agruegue parametro string para poner el # de ejercito (nose si se puede)
+        void agregarPersonaje(Personaje*);
         void eliminarPersonaje(Personaje*);
-        int getAncho(); // Se puede?
-        int getAlto(); // Se puede?
+        int getAncho();
+        int getAlto();
+        void setCentro(Posicion);
+        Posicion getCentro();
         ~Mapa();
 };
+
+#endif
