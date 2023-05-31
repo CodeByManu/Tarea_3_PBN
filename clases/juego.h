@@ -14,7 +14,7 @@ class Juego{
         int n2;
         Juego();
         void jugar();
-        void chequearGanador();
+        int chequearGanador(Personaje**, int, Personaje**, int);
         int calcularTurno();
         int quienParte();
         void mostrarMapa();
