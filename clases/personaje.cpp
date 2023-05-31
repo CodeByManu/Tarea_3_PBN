@@ -2,7 +2,7 @@
 #include "juego.h"
 #include <iostream>
 
-Personaje::Personaje():pos{pos} {}
+Personaje::Personaje() {}
 
 Personaje::Personaje(std::string nombre, int vida, int danio, int velocidad, Posicion pos) {
     this -> nombre = nombre;
@@ -61,13 +61,13 @@ Posicion Personaje::moverse() {
     }
 }
 
-std::string Personaje::getNombre() {
-    return nombre;
-}
-
 void Personaje::matar(Personaje* personaje){
     this -> vida = 0;
     this -> estado = "muerto";
+}
+
+std::string Personaje::getNombre() {
+    return nombre;
 }
 
 int Personaje::getVida() {
@@ -84,6 +84,10 @@ int Personaje::getVelocidad() {
 
 Posicion Personaje::getPos() {
     return pos;
+}
+
+void Personaje::setPos(Posicion pos) {
+    this -> pos.set(pos.getX(), pos.getY());
 }
 
 void Personaje::setMapa(Mapa *tablero) {

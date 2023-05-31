@@ -9,6 +9,7 @@ void Juego::jugar() {
     // TODO
 }
 
+// for n in ejercitoX -> if muertesEX == ejercitoX.length -> ejercitoX pierde
 int Juego::chequearGanador(Personaje **e1, int n1, Personaje **e2, int n2) {
     int counterE1 = 0;
     int counterE2 = 0;
@@ -33,14 +34,14 @@ int Juego::chequearGanador(Personaje **e1, int n1, Personaje **e2, int n2) {
 }
 
 int Juego::calcularTurno() {
-    // TODO
+    
 }
 
-int Juego::quienParte(Personaje **e1, int n1, Personaje **e2, int n2) {
+int Juego::quienParte() {
     float suma1 = 0;
-    for (int i = 0; i < n1; i++) suma1 += e1[i] -> getVelocidad();
+    for (int i = 0; i < n1; i++) suma1 += ejercito1[i] -> getVelocidad();
     float suma2 = 0;
-    for (int i = 0; i < n1; i++) suma2 += e1[i] -> getVelocidad();
+    for (int i = 0; i < n2; i++) suma2 += ejercito2[i] -> getVelocidad();
 
     if ((suma1/n1 > suma2/n2) | (suma1/n1 == suma2/n2)) return 1;
     else return 2;
@@ -61,7 +62,30 @@ void Juego::mostrarMapa() {
     }
 }
 
-void Juego::combate(Personaje *p1, Personaje *p2) {
+void Juego::combate(Personaje *ataca, Personaje *defiende) {
+    // int xAux = ataca -> posPrevia.getX();
+    // int yAux = ataca -> posPrevia.getY();
+    Posicion posPrevia(ataca -> posPrevia.getX(), ataca -> posPrevia.getY());
+
+    
+    // ataca -> moverse(); //hacer fuera de metodo <-------------------
+    // if (ejercito2[6] -> combatePendiente == 1){
+        // Personaje *defiende = llamarEnemigo(ejercito2[6] -> getPos(), ejercito1, n1);
+        combateDef(ataca, defiende);
+        std::cout << ataca -> getPos().getX() << ataca -> getPos().getY() << std::endl;
+        ataca -> setPos(posPrevia);
+        std::cout << ataca -> getPos().getX() << ataca -> getPos().getY() << std::endl;
+        tablero -> eliminarPersonaje(ataca);
+        
+        if (defiende -> estado == "muerto"){
+            ataca -> getPos().set(defiende -> getPos().getX(), defiende -> getPos().getY());
+            tablero -> eliminarPersonaje(defiende);
+            tablero -> agregarPersonaje(ataca);
+        }
+    // }
+}
+
+void Juego::combateDef(Personaje *p1, Personaje *p2) {
     std::cout << "Comienza pelea entre " << p1 -> getNombre() << " y " << p2 -> getNombre() << ":" << std::endl;
     std::cout << "La velocidad de " << p1 -> getNombre() << " es de " << p1 -> getVelocidad();
     std::cout << ", la de " << p2 -> getNombre() << " es de " << p2 -> getVelocidad();
@@ -75,7 +99,6 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
         std::cout << primero -> getNombre() << " inflinge " << primero -> getDanio() << " de daño a " << segundo -> getNombre();
         segundo -> recibirAtaque(primero);
         if (segundo -> getVida() <= 0) {
-            std::cout << "test - Max" << std::endl;
             std::cout << ", vida restante: 0" << std::endl;
             tablero -> eliminarPersonaje(segundo);
             segundo -> matar(segundo);

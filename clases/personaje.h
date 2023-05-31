@@ -15,9 +15,9 @@ class Personaje{
         int danio;
         int velocidad;
         Mapa *tablero;
-
-    public:
         Posicion pos;
+    public:
+        Posicion posPrevia;
         std::string ejercito; //Publico o privado?
         std::string estado = "vivo";
         int combatePendiente = 0;
@@ -26,13 +26,14 @@ class Personaje{
         int ataque();
         void recibirAtaque(Personaje*);
         Posicion moverse();
+        void matar(Personaje*);
         std::string getNombre();
         int getVida();
         int getDanio();
         int getVelocidad();
         Posicion getPos();
+        void setPos(Posicion);
         void setMapa(Mapa*);
-        void matar(Personaje*);
         ~Personaje();
 };
 

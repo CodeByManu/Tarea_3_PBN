@@ -68,8 +68,32 @@ int main() {
 
     Juego juego;
     juego.setMapa(tablero);
+    juego.ejercito1 = ejercito1; juego.n1 = n1;
+    juego.ejercito2 = ejercito2; juego.n2 = n2;
     juego.mostrarMapa();
 
+
+    // <<<<<<< tomas
+
+    // int xAux = ejercito2[6] -> getPos().getX();
+    // int yAux = ejercito2[6] -> getPos().getY();
+
+    ejercito2[6] -> posPrevia = ejercito2[6] -> getPos();
+    
+    cout << ejercito2[6] -> posPrevia.getX() << ejercito2[6] -> posPrevia.getY() << endl;
+    ejercito2[6] -> moverse();
+    cout << ejercito2[6] -> posPrevia.getX() << ejercito2[6] -> posPrevia.getY() << endl;
+    cout << ejercito2[6] -> getPos().getX() << ejercito2[6] -> getPos().getY() << endl;
+
+    if (ejercito2[6] -> combatePendiente == 1){ // Esto puede ser parte de loop principal
+        juego.combate(ejercito2[6], juego.llamarEnemigo(ejercito2[6] -> getPos(), ejercito1, n1));
+    }
+    //     Personaje *enemigo = juego.llamarEnemigo(ejercito2[6] -> getPos(), ejercito1, n1);
+    //     juego.combate(ejercito2[6], enemigo);
+    // >>>>>>> tomas
+  
+
+    // <<<<<<< manu
     Personaje ***ejercitos = new Personaje**[2];
     ejercitos[0] = ejercito1;
     ejercitos[1] = ejercito2;
@@ -110,28 +134,7 @@ int main() {
             juego.mostrarMapa();
         }
     }
-    // int xAux = ejercito2[6] -> getPos().getX();
-    // int yAux = ejercito2[6] -> getPos().getY();
-    
-    // ejercito2[6] -> moverse();
-    // if (ejercito2[6] -> combatePendiente == 1 && ejercito2[6] -> estado == "vivo"){
-    //     Personaje *enemigo = juego.llamarEnemigo(ejercito2[6] -> getPos(), ejercito1, n1);
-    //     juego.combate(ejercito2[6], enemigo);
-
-    //     ejercito2[6] -> pos.set(xAux, yAux);
-    //     tablero -> eliminarPersonaje(ejercito2[6]);
-        
-    //     if (enemigo -> estado == "muerto"){
-    //         ejercito2[6] -> pos.set(enemigo -> pos.getX(), enemigo -> pos.getY());
-    //         tablero -> eliminarPersonaje(enemigo);
-    //         tablero -> agregarPersonaje(ejercito2[6]);
-    //     }
-
-    //     cout << enemigo -> getNombre() << " | " << enemigo -> getVida() << ":" << enemigo -> estado << endl;
-    //     cout << ejercito2[6] -> getNombre() << " | " << ejercito2[6] -> getVida() << ":" << ejercito2[6] -> estado << endl;
-    // }
-
-
+    // >>>>>>> manu
 
     // if (ejercito1[3] -> getPos().getX() == ejercito2[4] -> getPos().getX() && ejercito1[3] -> getPos().getY() == ejercito2[4] -> getPos().getY())
 
