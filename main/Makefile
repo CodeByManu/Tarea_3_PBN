@@ -4,8 +4,8 @@ name=tarea_3#TODO Ponerle nombre al programa
 source=main#TODO ponerle nombre al codigo
 hpath=../clases/
 
-$(name): $(source).o posicion.o personaje.o mapa.o juego.o
-	$(CC) $(flags) $(source).o posicion.o personaje.o mapa.o juego.o -o $(name)
+$(name): $(source).o posicion.o personaje.o mapa.o juego.o ejercito.o
+	$(CC) $(flags) $(source).o posicion.o personaje.o mapa.o juego.o ejercito.o -o $(name)
 	
 run: $(name)
 	./$(name)
@@ -23,6 +23,9 @@ mapa.o: ${hpath}mapa.cpp
 
 juego.o: ${hpath}juego.cpp
 	$(CC) $(flags) -c -o juego.o ${hpath}juego.cpp
+
+ejercito.o: ${hpath}ejercito.cpp
+	$(CC) $(flags) -c -o ejercito.o ${hpath}ejercito.cpp
 
 $(source).o: $(source).cpp
 	$(CC) $(flags) -c -o $(source).o $(source).cpp

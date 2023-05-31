@@ -1,4 +1,5 @@
 #include "mapa.h"
+#include "ejercito.h"
 
 class Juego{
     private:
@@ -8,10 +9,10 @@ class Juego{
         void combateDes(Personaje*, Personaje*);
         void combateDef(Personaje*, Personaje*);
     public:
-        Personaje **ejercito1;
-        int n1;
-        Personaje **ejercito2;
-        int n2;
+        // Atributos publicos
+        Ejercito ejercito1;
+        Ejercito ejercito2;
+        // Metodos
         Juego();
         void jugar();
         void chequearGanador();
@@ -19,6 +20,7 @@ class Juego{
         int quienParte();
         void mostrarMapa();
         void combate(Personaje*, Personaje*);
-        void setMapa(Mapa*); // Se puede?
-        Personaje* llamarEnemigo(Posicion, Personaje**, int n);
+        Personaje* llamarEnemigo(Posicion, Ejercito);
+        // Setters
+        void setMapa(Mapa*);
 };
