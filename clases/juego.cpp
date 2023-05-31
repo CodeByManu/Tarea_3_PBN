@@ -3,7 +3,7 @@
 
 #include "juego.h"
 
-Juego::Juego():tablero{tablero} {}
+Juego::Juego() {}
 
 void Juego::jugar() {
     // TODO
@@ -38,12 +38,10 @@ int Juego::calcularTurno() {
 }
 
 int Juego::quienParte() {
-    float suma1 = 0;
-    for (int i = 0; i < n1; i++) suma1 += ejercito1[i] -> getVelocidad();
-    float suma2 = 0;
-    for (int i = 0; i < n2; i++) suma2 += ejercito2[i] -> getVelocidad();
+    int media1 = ejercito1.getVelMedia();
+    int media2 = ejercito2.getVelMedia();
 
-    if ((suma1/n1 > suma2/n2) | (suma1/n1 == suma2/n2)) return 1;
+    if ((media1 > media2) | (media1 == media2)) return 1;
     else return 2;
     
 }
@@ -63,26 +61,17 @@ void Juego::mostrarMapa() {
 }
 
 void Juego::combate(Personaje *ataca, Personaje *defiende) {
-    // int xAux = ataca -> posPrevia.getX();
-    // int yAux = ataca -> posPrevia.getY();
     Posicion posPrevia(ataca -> posPrevia.getX(), ataca -> posPrevia.getY());
 
+    combateDef(ataca, defiende);
+    ataca -> setPos(posPrevia);
+    tablero -> eliminarPersonaje(ataca);
     
-    // ataca -> moverse(); //hacer fuera de metodo <-------------------
-    // if (ejercito2[6] -> combatePendiente == 1){
-        // Personaje *defiende = llamarEnemigo(ejercito2[6] -> getPos(), ejercito1, n1);
-        combateDef(ataca, defiende);
-        std::cout << ataca -> getPos().getX() << ataca -> getPos().getY() << std::endl;
-        ataca -> setPos(posPrevia);
-        std::cout << ataca -> getPos().getX() << ataca -> getPos().getY() << std::endl;
-        tablero -> eliminarPersonaje(ataca);
-        
-        if (defiende -> estado == "muerto"){
-            ataca -> getPos().set(defiende -> getPos().getX(), defiende -> getPos().getY());
-            tablero -> eliminarPersonaje(defiende);
-            tablero -> agregarPersonaje(ataca);
-        }
-    // }
+    if (defiende -> estado == "muerto"){
+        ataca -> getPos().set(defiende -> getPos().getX(), defiende -> getPos().getY());
+        tablero -> eliminarPersonaje(defiende);
+        tablero -> agregarPersonaje(ataca);
+    }
 }
 
 void Juego::combateDef(Personaje *p1, Personaje *p2) {
@@ -129,11 +118,11 @@ void Juego::setMapa(Mapa *tablero) {
     alto = tablero -> getAlto();
 }
 
-Personaje* Juego::llamarEnemigo(Posicion pos, Personaje **equipo, int n) {
-    for (int i = 0; i < n; i++){
-        if (equipo[i] -> getPos().getX() == pos.getX() && equipo[i] -> getPos().getY() == pos.getY()) {
-            std::cout << "Enemigo encontrado: " << equipo[i] -> getNombre() << std::endl;
-            return equipo[i];
+Personaje* Juego::llamarEnemigo(Posicion pos, Ejercito ejercitoRival) {
+    for (int i = 0; i < ejercitoRival.getCantidad(); i++){
+        if (ejercitoRival.personajes[i] -> getPos().getX() == pos.getX() && ejercitoRival.personajes[i] -> getPos().getY() == pos.getY()) {
+            std::cout << "Enemigo encontrado: " << ejercitoRival.personajes[i] -> getNombre() << std::endl;
+            return ejercitoRival.personajes[i];
         }
     }
 }

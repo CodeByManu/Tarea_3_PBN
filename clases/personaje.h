@@ -17,10 +17,12 @@ class Personaje{
         Mapa *tablero;
         Posicion pos;
     public:
+        // Atributos publicos
         Posicion posPrevia;
         std::string ejercito; //Publico o privado?
         std::string estado = "vivo";
         int combatePendiente = 0;
+        // Metodos
         Personaje();
         Personaje(std::string, int, int, int, Posicion);
         int ataque();
@@ -28,12 +30,15 @@ class Personaje{
         Posicion moverse();
         void matar(Personaje*);
         std::string getNombre();
+        // Getters
         int getVida();
         int getDanio();
         int getVelocidad();
         Posicion getPos();
+        // Setters
         void setPos(Posicion);
         void setMapa(Mapa*);
+        // Destructor
         ~Personaje();
 };
 
