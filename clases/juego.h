@@ -3,17 +3,20 @@
 class Juego{
     private:
         Mapa *tablero;
-        Personaje **equipo1;
-        Personaje **equipo2;
         int ancho;
         int alto;
         void combateDes(Personaje*, Personaje*);
+        void combateDef(Personaje*, Personaje*);
     public:
+        Personaje **ejercito1;
+        int n1;
+        Personaje **ejercito2;
+        int n2;
         Juego();
         void jugar();
         void chequearGanador();
         int calcularTurno();
-        int quienParte(Personaje**, int, Personaje**, int);
+        int quienParte();
         void mostrarMapa();
         void combate(Personaje*, Personaje*);
         void setMapa(Mapa*); // Se puede?
