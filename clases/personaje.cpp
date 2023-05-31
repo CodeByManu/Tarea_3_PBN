@@ -66,6 +66,7 @@ std::string Personaje::getNombre() {
 }
 
 void Personaje::matar(Personaje* personaje){
+    this -> vida = 0;
     this -> estado = "muerto";
 }
 

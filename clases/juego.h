@@ -11,7 +11,7 @@ class Juego{
     public:
         Juego();
         void jugar();
-        void chequearGanador();
+        int chequearGanador(Personaje**, int, Personaje**, int);
         int calcularTurno();
         int quienParte(Personaje**, int, Personaje**, int);
         void mostrarMapa();

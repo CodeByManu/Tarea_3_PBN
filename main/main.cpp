@@ -70,24 +70,68 @@ int main() {
     juego.setMapa(tablero);
     juego.mostrarMapa();
 
+    Personaje ***ejercitos = new Personaje**[2];
+    ejercitos[0] = ejercito1;
+    ejercitos[1] = ejercito2;
 
-    int xAux = ejercito2[6] -> getPos().getX();
-    int yAux = ejercito2[6] -> getPos().getY();
-    
-    ejercito2[6] -> moverse();
-    if (ejercito2[6] -> combatePendiente == 1){
-        Personaje *enemigo = juego.llamarEnemigo(ejercito2[6] -> getPos(), ejercito1, n1);
-        juego.combate(ejercito2[6], enemigo);
+    int whoStart = juego.quienParte(ejercito1, n1, ejercito2, n2); 
+    int turno = 0;
+    int e = 0;
+    int o = 1;
 
-        ejercito2[6] -> pos.set(xAux, yAux);
-        tablero -> eliminarPersonaje(ejercito2[6]);
-        
-        if (enemigo -> estado == "muerto"){
-            ejercito2[6] -> pos.set(enemigo -> pos.getX(), enemigo -> pos.getY());
-            tablero -> eliminarPersonaje(enemigo);
-            tablero -> agregarPersonaje(ejercito2[6]);
+    if (whoStart == 1){
+        cout << "Empieza el ejercito 1" << endl;
+        cout << "Turno: " << turno << endl;
+        while (1){
+            if (juego.chequearGanador(ejercitos[0], n1, ejercitos[1], n2) == (1 || 0)) break;
+            if (turno % 2 == 0) e = 0, o = 1;
+            else e = 1, o = 0;
+
+            if (turno > n1) turno = 0;
+
+            int xAux = ejercitos[e][turno] -> getPos().getX();
+            int yAux = ejercitos[e][turno] -> getPos().getY();
+
+            ejercitos[e][turno] -> moverse();
+            Personaje *enemigo = juego.llamarEnemigo(ejercitos[e][turno] -> getPos(), ejercitos[1], n2);
+            if (ejercitos[e][turno] -> combatePendiente == 1 && ejercitos[e][turno] -> estado == "vivo" && enemigo -> estado == "vivo"){
+                juego.combate(ejercitos[e][turno], enemigo);
+
+                ejercitos[e][turno] -> pos.set(xAux, yAux);
+                tablero -> eliminarPersonaje(ejercitos[0][turno]);
+                
+                if (enemigo -> estado == "muerto"){
+                    ejercitos[e][turno] -> pos.set(enemigo -> pos.getX(), enemigo -> pos.getY());
+                    tablero -> eliminarPersonaje(enemigo);
+                    tablero -> agregarPersonaje(ejercitos[e][turno]);
+                }       
+            }
+            turno++;
+            juego.mostrarMapa();
         }
     }
+    // int xAux = ejercito2[6] -> getPos().getX();
+    // int yAux = ejercito2[6] -> getPos().getY();
+    
+    // ejercito2[6] -> moverse();
+    // if (ejercito2[6] -> combatePendiente == 1 && ejercito2[6] -> estado == "vivo"){
+    //     Personaje *enemigo = juego.llamarEnemigo(ejercito2[6] -> getPos(), ejercito1, n1);
+    //     juego.combate(ejercito2[6], enemigo);
+
+    //     ejercito2[6] -> pos.set(xAux, yAux);
+    //     tablero -> eliminarPersonaje(ejercito2[6]);
+        
+    //     if (enemigo -> estado == "muerto"){
+    //         ejercito2[6] -> pos.set(enemigo -> pos.getX(), enemigo -> pos.getY());
+    //         tablero -> eliminarPersonaje(enemigo);
+    //         tablero -> agregarPersonaje(ejercito2[6]);
+    //     }
+
+    //     cout << enemigo -> getNombre() << " | " << enemigo -> getVida() << ":" << enemigo -> estado << endl;
+    //     cout << ejercito2[6] -> getNombre() << " | " << ejercito2[6] -> getVida() << ":" << ejercito2[6] -> estado << endl;
+    // }
+
+
 
     // if (ejercito1[3] -> getPos().getX() == ejercito2[4] -> getPos().getX() && ejercito1[3] -> getPos().getY() == ejercito2[4] -> getPos().getY())
 

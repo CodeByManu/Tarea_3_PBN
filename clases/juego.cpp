@@ -9,8 +9,27 @@ void Juego::jugar() {
     // TODO
 }
 
-void Juego::chequearGanador() {
-    // TODO
+int Juego::chequearGanador(Personaje **e1, int n1, Personaje **e2, int n2) {
+    int counterE1 = 0;
+    int counterE2 = 0;
+
+    for (int i = 0; i < n1; i++) {
+        if (e1[i] -> estado == "vivo") counterE1++;
+    }
+    for (int i = 0; i < n2; i++) {
+        if (e2[i] -> estado == "vivo") counterE2++;
+    }
+
+    if (counterE1 == 0) {
+        std::cout << "Ganador: Equipo 2" << std::endl;
+        return 1;
+    }
+    else if (counterE2 == 0) {
+        std::cout << "Ganador: Equipo 1" << std::endl;
+        return 2;
+    }
+    else std::cout << "No hay ganador aun" << std::endl;
+    return 0;
 }
 
 int Juego::calcularTurno() {
