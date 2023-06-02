@@ -36,7 +36,7 @@ class Personaje{
         int getVelocidad();
         Posicion getPos();
         // Setters
-        void setPos(Posicion);
+        void setPos(int, int);
         void setMapa(Mapa*);
         // Destructor
         ~Personaje();

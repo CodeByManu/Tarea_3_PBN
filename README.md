@@ -42,6 +42,7 @@
 
     - **void jugar():** inicia el juego
     - **void chequearGanador():** chequea si ha ganado alguno de los ejercitos
+    - **int calcularTurno():** retorna el indice del personaje que debe jugar
     - **void mostrarMapa():** muestra en la consola el mapa del juego y con sus personajes
     - **void combate(Personaje p1, Personaje p2):** Simula una pelea entre dos personajes
 

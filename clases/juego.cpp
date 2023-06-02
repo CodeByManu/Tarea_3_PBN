@@ -6,40 +6,70 @@
 Juego::Juego() {}
 
 void Juego::jugar() {
-    // TODO
+    estado = 1;
 }
 
-// for n in ejercitoX -> if muertesEX == ejercitoX.length -> ejercitoX pierde
-int Juego::chequearGanador(Personaje **e1, int n1, Personaje **e2, int n2) {
+// for n in ejercitoX -> if muertesEX == ejercitoX.length -> ejercitoX pierde >> IDEA
+int Juego::chequearGanador() {
     int counterE1 = 0;
     int counterE2 = 0;
 
-    for (int i = 0; i < n1; i++) {
-        if (e1[i] -> estado == "vivo") counterE1++;
+    for (int i = 0; i < ejercito1.getCantidad(); i++) {
+        if (ejercito1.personajes[i] -> estado == "vivo") counterE1++;
     }
-    for (int i = 0; i < n2; i++) {
-        if (e2[i] -> estado == "vivo") counterE2++;
+    for (int i = 0; i < ejercito2.getCantidad(); i++) {
+        if (ejercito2.personajes[i] -> estado == "vivo") counterE2++;
     }
 
     if (counterE1 == 0) {
         std::cout << "Ganador: Equipo 2" << std::endl;
-        return 1;
+        estado = 0;
+        return 2;
     }
     else if (counterE2 == 0) {
         std::cout << "Ganador: Equipo 1" << std::endl;
-        return 2;
+        estado = 0;
+        return 1;
     }
-    else std::cout << "No hay ganador aun" << std::endl;
-    return 0;
+    else {
+        std::cout << "No hay ganador aun" << std::endl;
+        return 0;
+    }
 }
 
 int Juego::calcularTurno() {
-    
+    if (turno % 2 == 0) ejercitoActual = 0, ejercitoEnemigo = 1, indice++;
+    else ejercitoActual = 1, ejercitoEnemigo = 0;
+    turno++;
+    return turno;
+}
+
+void Juego::turnoDes(Ejercito ejercitoX) {
+    chequearGanador();
+    if (indice >= ejercitoX.getCantidad()) indice = 0; // No seria (>=)?
+    if (ejercitoX.personajes[indice] -> estado == "vivo") {
+
+        ejercitoX.personajes[indice] -> posPrevia = ejercitoX.personajes[indice] -> getPos();
+        
+        movimiento = ejercitoX.personajes[indice] -> moverse();
+        rastro = Posicion(ejercitoX.personajes[indice] -> posPrevia.getX(), ejercitoX.personajes[indice] -> posPrevia.getY());
+
+        // Necesario lo de abajo?
+        // cout << "Turno " << indice << ": " << ejercitoX.personajes[indice] -> getNombre() << ". Posicion: " << ejercitoX.personajes[indice] -> getPos().getX() << ", " << ejercitoX.personajes[indice] -> getPos().getY() << endl;
+        Personaje *enemigo = llamarEnemigo(ejercitoX.personajes[indice] -> getPos(), ejercitoX); // Cambiar ejercito
+
+        if (enemigo){
+            if ((ejercitoX.personajes[indice] -> combatePendiente == 1) && (ejercitoX.personajes[indice] -> estado == "vivo") && (enemigo -> estado == "vivo")){
+                combate(ejercitoX.personajes[indice], enemigo);
+            }
+        }
+    mostrarMapa();
+    }
 }
 
 int Juego::quienParte() {
-    int media1 = ejercito1.getVelMedia();
-    int media2 = ejercito2.getVelMedia();
+    int media1 = ejercito1.getVelMedia(); std::cout << media1 << std::endl;
+    int media2 = ejercito2.getVelMedia(); std::cout << media2 << std::endl;
 
     if ((media1 > media2) | (media1 == media2)) return 1;
     else return 2;
@@ -52,7 +82,11 @@ void Juego::mostrarMapa() {
     for(int i = 0; i < alto*2; i++){
         std::cout << '|';
         for(int j = 0; j < ancho; j++) {
-            if (j == (tablero -> getCentro().getX()) && (i == tablero -> getCentro().getY() | i == (tablero -> getCentro().getY() + 1))) {
+            if (j == movimiento.getX() && (i == movimiento.getY()*2 || i == movimiento.getY()*2 + 1) ) {
+            std::cout << "\033[48;2;255;63;63m" << "\033[38;2;204;204;204m" << tablero -> tablero[j][i] << "\033[0m" << '|';
+            } else if (j == rastro.getX() && (i == rastro.getY()*2 || i == rastro.getY()*2 + 1)) {
+            std::cout << "\033[48;2;255;125;125m" << "\033[38;2;204;204;204m" << tablero -> tablero[j][i] << "\033[0m" << '|';
+            } else if (j == (tablero -> getCentro().getX()) && ((i == tablero -> getCentro().getY()) | (i == (tablero -> getCentro().getY() + 1)))) {
                 std::cout << "\033[48;2;97;214;214m" << "\033[38;2;204;204;204m" << tablero -> tablero[j][i] << "\033[0m" << '|';
             } else std::cout << tablero -> tablero[j][i] << '|';
         }
@@ -61,14 +95,14 @@ void Juego::mostrarMapa() {
 }
 
 void Juego::combate(Personaje *ataca, Personaje *defiende) {
-    Posicion posPrevia(ataca -> posPrevia.getX(), ataca -> posPrevia.getY());
+    // Posicion posPrevia(ataca -> posPrevia.getX(), ataca -> posPrevia.getY());
 
     combateDef(ataca, defiende);
-    ataca -> setPos(posPrevia);
+    ataca -> setPos(ataca -> posPrevia.getX(), ataca -> posPrevia.getY());
     tablero -> eliminarPersonaje(ataca);
     
     if (defiende -> estado == "muerto"){
-        ataca -> getPos().set(defiende -> getPos().getX(), defiende -> getPos().getY());
+        ataca -> setPos(defiende -> getPos().getX(), defiende -> getPos().getY());
         tablero -> eliminarPersonaje(defiende);
         tablero -> agregarPersonaje(ataca);
     }
@@ -84,14 +118,14 @@ void Juego::combateDef(Personaje *p1, Personaje *p2) {
 
 void Juego::combateDes(Personaje *primero, Personaje *segundo) {
     std::cout << ", comienza atacando " << primero -> getNombre() << std::endl;
-    while ((primero -> getVida() | segundo -> getVida()) > 0){
+    while ((primero -> getVida() || segundo -> getVida()) > 0){
         std::cout << primero -> getNombre() << " inflinge " << primero -> getDanio() << " de daño a " << segundo -> getNombre();
         segundo -> recibirAtaque(primero);
         if (segundo -> getVida() <= 0) {
             std::cout << ", vida restante: 0" << std::endl;
-            tablero -> eliminarPersonaje(segundo);
+            // tablero -> eliminarPersonaje(segundo);
             segundo -> matar(segundo);
-            tablero -> agregarPersonaje(primero);
+            // tablero -> agregarPersonaje(primero);
             break;
         }
         else std::cout << ", vida restante: " << segundo -> getVida() << std::endl;
@@ -99,9 +133,9 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
         primero -> recibirAtaque(segundo);
         if (primero -> getVida() <= 0) {
             std::cout << ", vida restante: 0" << std::endl;
-            tablero -> eliminarPersonaje(primero);
+            // tablero -> eliminarPersonaje(primero);
             primero -> matar(primero);
-            tablero -> agregarPersonaje(segundo);
+            // tablero -> agregarPersonaje(segundo);
 
             break;
         }
@@ -112,6 +146,10 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
     else std::cout << segundo -> getNombre() << std::endl;
 }
 
+int Juego::getEstado() {
+    return estado;
+}
+
 void Juego::setMapa(Mapa *tablero) {
     this -> tablero = tablero;
     ancho = tablero -> getAncho();
@@ -120,9 +158,14 @@ void Juego::setMapa(Mapa *tablero) {
 
 Personaje* Juego::llamarEnemigo(Posicion pos, Ejercito ejercitoRival) {
     for (int i = 0; i < ejercitoRival.getCantidad(); i++){
-        if (ejercitoRival.personajes[i] -> getPos().getX() == pos.getX() && ejercitoRival.personajes[i] -> getPos().getY() == pos.getY()) {
+        if ((ejercitoRival.personajes[i] -> getPos().getX() == pos.getX()) && (ejercitoRival.personajes[i] -> getPos().getY() == pos.getY()) && (ejercitoRival.personajes[i] -> estado == "vivo")) {
             std::cout << "Enemigo encontrado: " << ejercitoRival.personajes[i] -> getNombre() << std::endl;
             return ejercitoRival.personajes[i];
         }
     }
+    std::cout << "No se encontro ningun enemigo." << std::endl;
+    return nullptr;
+    // Personaje *p = new Personaje("basura", 0, 0, 0, Posicion (0, 0));
+    // p -> estado = "muerto";
+    // return p;
 }

@@ -1,5 +1,5 @@
 CC=g++
-flags=-std=c++11 #-Wall -Wextra -Wundef -Werror -Wuninitialized -Winit-self
+flags=-std=c++11 -Wall -Wextra -Wundef -Werror -Wuninitialized -Winit-self
 name=tarea_3#TODO Ponerle nombre al programa
 source=main#TODO ponerle nombre al codigo
 hpath=../clases/

@@ -21,49 +21,51 @@ void Personaje::recibirAtaque(Personaje *enemigo) {
 }
 
 Posicion Personaje::moverse() {
-    int x = pos.getX();
-    int y = pos.getY();
+    if (this -> estado == "vivo") {
+        int x = pos.getX();
+        int y = pos.getY();
 
-    char ejercitoAux = tablero -> tablero[x][y*2 + 1][2];
+        char ejercitoAux = tablero -> tablero[x][y*2 + 1][2];
 
-    int xAux = x;
-    int yAux = y;
+        int xAux = x;
+        int yAux = y;
 
-    int xCentro = tablero -> getCentro().getX();
-    int yCentro = tablero -> getCentro().getY();
+        int xCentro = tablero -> getCentro().getX();
+        int yCentro = tablero -> getCentro().getY();
 
-    if (x > xCentro) x--;
-    else if (x < xCentro) x++;
-    if (y*2 > yCentro) y--;
-    else if (y*2 < yCentro) y++;
+        if (x > xCentro) x--;
+        else if (x < xCentro) x++;
+        if (y*2 > yCentro) y--;
+        else if (y*2 < yCentro) y++;
 
-    if (tablero -> tablero[x][y*2] == "     ") {
-        tablero -> eliminarPersonaje(this);
-        this -> pos.set(x, y);
-        tablero -> agregarPersonaje(this);
-        return pos;
-    } else {
-        if (tablero -> tablero[x][y*2 + 1][2] != ejercitoAux) {
+        if (tablero -> tablero[x][y*2] == "     ") {
+            tablero -> eliminarPersonaje(this);
             this -> pos.set(x, y);
-            this -> combatePendiente = 1;
+            tablero -> agregarPersonaje(this);
             return pos;
         } else {
-            if (tablero -> tablero[xAux][y*2] == "     "){
-                tablero -> eliminarPersonaje(this);
-                this -> pos.set(xAux, y);
-                // tablero -> agregarPersonaje(this);
+            if (tablero -> tablero[x][y*2 + 1][2] != ejercitoAux) {
+                this -> pos.set(x, y);
+                this -> combatePendiente = 1;
                 return pos;
             } else {
-                this -> pos.set(xAux, yAux);
-                return pos;
+                if (tablero -> tablero[xAux][y*2] == "     "){
+                    tablero -> eliminarPersonaje(this);
+                    this -> pos.set(xAux, y);
+                    tablero -> agregarPersonaje(this);
+                    return pos;
+                } else {
+                    this -> pos.set(xAux, yAux);
+                    return pos;
+                }
             }
         }
-    }
+    } else return pos;
 }
 
 void Personaje::matar(Personaje* personaje){
-    this -> vida = 0;
-    this -> estado = "muerto";
+    personaje -> vida = 0;
+    personaje -> estado = "muerto";
 }
 
 std::string Personaje::getNombre() {
@@ -86,8 +88,8 @@ Posicion Personaje::getPos() {
     return pos;
 }
 
-void Personaje::setPos(Posicion pos) {
-    this -> pos.set(pos.getX(), pos.getY());
+void Personaje::setPos(int x, int y) {
+    this -> pos.set(x, y);
 }
 
 void Personaje::setMapa(Mapa *tablero) {
