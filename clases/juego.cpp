@@ -44,9 +44,9 @@ int Juego::calcularTurno() {
     return turno;
 }
 
-void Juego::turnoDes(Ejercito ejercitoX) {
+void Juego::turnoDes(Ejercito ejercitoX, Ejercito ejercitoY) {
     chequearGanador();
-    if (indice >= ejercitoX.getCantidad()) indice = 0; // No seria (>=)?
+    if (indice >= ejercitoX.getCantidad()) indice = 0;
     if (ejercitoX.personajes[indice] -> estado == "vivo") {
 
         ejercitoX.personajes[indice] -> posPrevia = ejercitoX.personajes[indice] -> getPos();
@@ -55,8 +55,8 @@ void Juego::turnoDes(Ejercito ejercitoX) {
         rastro = Posicion(ejercitoX.personajes[indice] -> posPrevia.getX(), ejercitoX.personajes[indice] -> posPrevia.getY());
 
         // Necesario lo de abajo?
-        // cout << "Turno " << indice << ": " << ejercitoX.personajes[indice] -> getNombre() << ". Posicion: " << ejercitoX.personajes[indice] -> getPos().getX() << ", " << ejercitoX.personajes[indice] -> getPos().getY() << endl;
-        Personaje *enemigo = llamarEnemigo(ejercitoX.personajes[indice] -> getPos(), ejercitoX); // Cambiar ejercito
+        std::cout << "Turno " << indice << ": " << ejercitoX.personajes[indice] -> getNombre() << ". Posicion: " << ejercitoX.personajes[indice] -> getPos().getX() << ", " << ejercitoX.personajes[indice] -> getPos().getY() << std::endl;
+        Personaje *enemigo = llamarEnemigo(ejercitoX.personajes[indice] -> getPos(), ejercitoY);
 
         if (enemigo){
             if ((ejercitoX.personajes[indice] -> combatePendiente == 1) && (ejercitoX.personajes[indice] -> estado == "vivo") && (enemigo -> estado == "vivo")){
@@ -71,9 +71,9 @@ int Juego::quienParte() {
     int media1 = ejercito1.getVelMedia(); std::cout << media1 << std::endl;
     int media2 = ejercito2.getVelMedia(); std::cout << media2 << std::endl;
 
-    if ((media1 > media2) | (media1 == media2)) return 1;
-    else return 2;
-    
+
+    if ((media1 > media2) | (media1 == media2)) return 0;
+    else return 1;
 }
 
 void Juego::mostrarMapa() {

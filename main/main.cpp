@@ -83,23 +83,18 @@ int main() {
 
     juego.jugar();
 
-    while (juego.getEstado() == 1) {
-        
-    }
+    juego.ejercitoActual = juego.quienParte();
 
-
-    int whoStart = juego.quienParte();
+    if (juego.ejercitoActual == 0) juego.ejercitoEnemigo = 1;
+    else juego.ejercitoEnemigo = 0;
     
-    if (whoStart == 1){
-        cout << "Empieza el ejercito 1" << endl;
-        juego.jugar();
+    cout << "Empieza el ejercito " << juego.ejercitoActual + 1 << endl;
+    juego.jugar();
 
-        while (juego.getEstado() == 1){
-            juego.turnoDes();
-            juego.calcularTurno();
-        }
+    while (juego.getEstado() == 1){
+        juego.turnoDes(ejercitos[juego.ejercitoActual], ejercitos[juego.ejercitoEnemigo]);
+        juego.calcularTurno();
     }
-
 
     for (int i = 0; i < n1; i++) delete ejercito1Aux[i];
     delete[] ejercito1Aux;
@@ -110,17 +105,3 @@ int main() {
     soldados.close();
     return 0;
 }
-
-
-
-
-
-
-/* 
-
-e1 | e1
-0       0
-1       1
-2       2
-
- */
