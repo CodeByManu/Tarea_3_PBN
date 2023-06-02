@@ -1,9 +1,4 @@
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <algorithm>
-
-#include "../clases/juego.h"
+#include "../clases/hfiles.h"
 
 using namespace std;
 
@@ -34,8 +29,9 @@ int main() {
 
         getline(soldados, linea, ',');
         if (i == 0) nombre = linea.substr(1, linea.length()); // Windows = substr(1, linea.length()) || Linux = substr(2, linea.length())
-                                                              // Esto ya que cada OS formatea a su manera los .txt (\n\n o \n (o con \r)) y causado por traslado de archivos (Windows -> Linux)
+        // Esto ya que cada OS formatea a su manera los .txt (\n\n o \n (o con \r)) y causado por traslado de archivos (Windows -> Linux)
         else nombre = linea;
+        // Solo ocurria con el primer nombre de cada ejercito
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); danio = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
@@ -60,8 +56,9 @@ int main() {
 
         getline(soldados, linea, ',');
         if (i == 0) nombre = linea.substr(2, linea.length()); // Windows = substr(1, linea.length()) || Linux = substr(2, linea.length())
-                                                              // Esto ya que cada OS formatea a su manera los .txt (\n\n o \n (o con \r)) y causado por traslado de archivos (Windows -> Linux)
+        // Esto ya que cada OS formatea a su manera los .txt (\n\n o \n (o con \r)) y causado por traslado de archivos (Windows -> Linux)
         else nombre = linea;
+        // Solo ocurria con el primer nombre de cada ejercito
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); danio = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "personaje.h"
 
 class Ejercito {

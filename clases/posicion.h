@@ -1,3 +1,5 @@
+#pragma once
+
 class Posicion{
     private:
         int x;

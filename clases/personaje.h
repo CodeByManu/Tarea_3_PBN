@@ -1,5 +1,4 @@
-#ifndef PERSONAJE_H
-#define PERSONAJE_H
+#pragma once
 
 #include <string>
 
@@ -41,5 +40,3 @@ class Personaje{
         // Destructor
         ~Personaje();
 };
-
-#endif

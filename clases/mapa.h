@@ -1,5 +1,4 @@
-#ifndef MAPA_H
-#define MAPA_H
+#pragma once
 
 #include "personaje.h"
 
@@ -28,5 +27,3 @@ class Mapa {
         // Destructor
         ~Mapa();
 };
-
-#endif

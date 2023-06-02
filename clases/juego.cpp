@@ -9,7 +9,6 @@ void Juego::jugar() {
     estado = 1;
 }
 
-// for n in ejercitoX -> if muertesEX == ejercitoX.length -> ejercitoX pierde >> IDEA
 int Juego::chequearGanador() {
     int counterE1 = 0;
     int counterE2 = 0;
@@ -95,8 +94,6 @@ void Juego::mostrarMapa() {
 }
 
 void Juego::combate(Personaje *ataca, Personaje *defiende) {
-    // Posicion posPrevia(ataca -> posPrevia.getX(), ataca -> posPrevia.getY());
-
     combateDef(ataca, defiende);
     ataca -> setPos(ataca -> posPrevia.getX(), ataca -> posPrevia.getY());
     tablero -> eliminarPersonaje(ataca);
@@ -123,9 +120,7 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
         segundo -> recibirAtaque(primero);
         if (segundo -> getVida() <= 0) {
             std::cout << ", vida restante: 0" << std::endl;
-            // tablero -> eliminarPersonaje(segundo);
             segundo -> matar(segundo);
-            // tablero -> agregarPersonaje(primero);
             break;
         }
         else std::cout << ", vida restante: " << segundo -> getVida() << std::endl;
@@ -133,10 +128,7 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
         primero -> recibirAtaque(segundo);
         if (primero -> getVida() <= 0) {
             std::cout << ", vida restante: 0" << std::endl;
-            // tablero -> eliminarPersonaje(primero);
             primero -> matar(primero);
-            // tablero -> agregarPersonaje(segundo);
-
             break;
         }
         else std::cout << ", vida restante: " << primero -> getVida() << std::endl;
@@ -165,7 +157,4 @@ Personaje* Juego::llamarEnemigo(Posicion pos, Ejercito ejercitoRival) {
     }
     std::cout << "No se encontro ningun enemigo." << std::endl;
     return nullptr;
-    // Personaje *p = new Personaje("basura", 0, 0, 0, Posicion (0, 0));
-    // p -> estado = "muerto";
-    // return p;
 }
