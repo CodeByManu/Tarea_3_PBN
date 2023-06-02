@@ -32,6 +32,8 @@ class Juego{
         void combate(Personaje*, Personaje*);
         Personaje* llamarEnemigo(Posicion, Ejercito);
         int loopDelJuego(); // Idea
+        void bienvenidaJuego();
+        void separador();
         // Getters
         int getEstado();
         // Setters

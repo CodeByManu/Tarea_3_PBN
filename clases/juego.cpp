@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 // #include <windows.h>
 
 #include "juego.h"
@@ -31,7 +32,7 @@ int Juego::chequearGanador() {
         return 1;
     }
     else {
-        std::cout << "No hay ganador aun" << std::endl;
+        //std::cout << "No hay ganador aun" << std::endl;
         return 0;
     }
 }
@@ -54,7 +55,7 @@ void Juego::turnoDes(Ejercito ejercitoX, Ejercito ejercitoY) {
         rastro = Posicion(ejercitoX.personajes[indice] -> posPrevia.getX(), ejercitoX.personajes[indice] -> posPrevia.getY());
 
         // Necesario lo de abajo?
-        std::cout << "Turno " << indice << ": " << ejercitoX.personajes[indice] -> getNombre() << ". Posicion: " << ejercitoX.personajes[indice] -> getPos().getX() << ", " << ejercitoX.personajes[indice] -> getPos().getY() << std::endl;
+        std::cout << "Turno " << indice << ": " << ejercitoX.personajes[indice] -> getNombre() << " Posicion: (" << ejercitoX.personajes[indice] -> getPos().getX() << ", " << ejercitoX.personajes[indice] -> getPos().getY() << ")" << std::endl;
         Personaje *enemigo = llamarEnemigo(ejercitoX.personajes[indice] -> getPos(), ejercitoY);
 
         if (enemigo){
@@ -91,6 +92,7 @@ void Juego::mostrarMapa() {
         }
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
 
 void Juego::combate(Personaje *ataca, Personaje *defiende) {
@@ -106,6 +108,7 @@ void Juego::combate(Personaje *ataca, Personaje *defiende) {
 }
 
 void Juego::combateDef(Personaje *p1, Personaje *p2) {
+    separador();
     std::cout << "Comienza pelea entre " << p1 -> getNombre() << " y " << p2 -> getNombre() << ":" << std::endl;
     std::cout << "La velocidad de " << p1 -> getNombre() << " es de " << p1 -> getVelocidad();
     std::cout << ", la de " << p2 -> getNombre() << " es de " << p2 -> getVelocidad();
@@ -136,6 +139,7 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
     std::cout << "Combate finalizado, ha ganado ";
     if (primero -> getVida() > 0) std::cout << primero -> getNombre() << std::endl;
     else std::cout << segundo -> getNombre() << std::endl;
+    separador();
 }
 
 int Juego::getEstado() {
@@ -157,4 +161,17 @@ Personaje* Juego::llamarEnemigo(Posicion pos, Ejercito ejercitoRival) {
     }
     std::cout << "No se encontro ningun enemigo." << std::endl;
     return nullptr;
+}
+
+void Juego::separador(){
+    for (int i = 0; i < tablero -> getAncho() * 5 + tablero -> getAncho(); i ++) std::cout << '=';
+    std::cout << std::endl;
+}
+
+void Juego::bienvenidaJuego() {
+    int ancho = tablero -> getAncho();
+    separador();
+    for (int i = 0; i < (ancho + 1 / 2); i ++) std::cout << " ";
+    std::cout << "BIENVENIDO AL BATALLA MAS EPICA DE LA HISTORIA" << std::endl;
+    separador();
 }

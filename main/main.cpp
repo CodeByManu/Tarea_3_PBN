@@ -6,7 +6,7 @@ int main() {
 
     ifstream soldados;
     int n1, n2;
-    string tx, ty;
+    string tx, ty, string_aux;
     
     soldados.open("../input-data/soldados_windows.txt");
 
@@ -77,7 +77,11 @@ int main() {
     juego.setMapa(tablero);
     juego.ejercito1 = ejercito1;
     juego.ejercito2 = ejercito2;
+    juego.bienvenidaJuego();
     juego.mostrarMapa();
+
+    cout << endl << "Así queda la distribución de los soldados... Enter para continuar." << endl;
+    cin.get();
 
     Ejercito *ejercitos = new Ejercito[2];
     ejercitos[0] = juego.ejercito1;

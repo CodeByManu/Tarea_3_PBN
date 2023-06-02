@@ -20,4 +20,4 @@ $(source).o: $(source).cpp
 	$(CC) $(flags) -c -o $@ $<
 
 clean:
-	del -f *.o $(name).exe
+	rm -f *.o $(name).exe
