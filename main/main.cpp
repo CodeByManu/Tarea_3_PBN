@@ -13,7 +13,7 @@ int main() {
     int n1, n2;
     string tx, ty;
     
-    soldados.open("../input-data/soldados.txt");
+    soldados.open("../input-data/soldados_windows.txt");
 
     // Tablero
     getline(soldados, tx, ','); int x = stoi(tx);
@@ -31,9 +31,11 @@ int main() {
     for (int i = 0; i < n1; i++) {
         string linea, nombre;
         int vida, danio, velocidad, px, py;
-        //remove() lleva al final todos los elementos que se quieren borrar y retorna un iterador
-        //.erase borra todo lo que se le entrega, pero de parametros recibe iteradores, por eso el buen funcionamiento del modismo remove-erase
-        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.end()); nombre = linea;
+
+        getline(soldados, linea, ',');
+        if (i == 0) nombre = linea.substr(1, linea.length()); // Windows = substr(1, linea.length()) || Linux = substr(2, linea.length())
+                                                              // Esto ya que cada OS formatea a su manera los .txt (\n\n o \n (o con \r)) y causado por traslado de archivos (Windows -> Linux)
+        else nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); danio = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);
@@ -56,7 +58,10 @@ int main() {
         string linea, nombre;
         int vida, danio, velocidad, px, py;
 
-        getline(soldados, linea, ','); linea.erase(remove(linea.begin(), linea.end(), '\n'), linea.end()); nombre = linea;
+        getline(soldados, linea, ',');
+        if (i == 0) nombre = linea.substr(2, linea.length()); // Windows = substr(1, linea.length()) || Linux = substr(2, linea.length())
+                                                              // Esto ya que cada OS formatea a su manera los .txt (\n\n o \n (o con \r)) y causado por traslado de archivos (Windows -> Linux)
+        else nombre = linea;
         getline(soldados, linea, ','); vida = stoi(linea);
         getline(soldados, linea, ','); danio = stoi(linea);
         getline(soldados, linea, ','); velocidad = stoi(linea);

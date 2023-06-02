@@ -31,4 +31,4 @@ $(source).o: $(source).cpp
 	$(CC) $(flags) -c -o $(source).o $(source).cpp
 
 clean:
-	del -f *.o $(name).exe
+	rm -f *.o $(name).exe
