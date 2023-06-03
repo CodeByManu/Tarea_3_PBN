@@ -22,12 +22,10 @@ int Juego::chequearGanador() {
     }
 
     if (counterE1 == 0) {
-        std::cout << "Ganador: Equipo 2" << std::endl;
         estado = 0;
         return 2;
     }
     else if (counterE2 == 0) {
-        std::cout << "Ganador: Equipo 1" << std::endl;
         estado = 0;
         return 1;
     }
@@ -46,24 +44,26 @@ int Juego::calcularTurno() {
 
 void Juego::turnoDes(Ejercito ejercitoX, Ejercito ejercitoY) {
     chequearGanador();
-    if (indice >= ejercitoX.getCantidad()) indice = 0;
-    if (ejercitoX.personajes[indice] -> estado == "vivo") {
+    if (estado == 1){
+        if (indice >= ejercitoX.getCantidad()) indice = 0;
+        if (ejercitoX.personajes[indice] -> estado == "vivo") {
+        std::cout << ">> Turno: " << turno << " <<" << std::endl;
 
-        ejercitoX.personajes[indice] -> posPrevia = ejercitoX.personajes[indice] -> getPos();
-        
-        movimiento = ejercitoX.personajes[indice] -> moverse();
-        rastro = Posicion(ejercitoX.personajes[indice] -> posPrevia.getX(), ejercitoX.personajes[indice] -> posPrevia.getY());
+            ejercitoX.personajes[indice] -> posPrevia = ejercitoX.personajes[indice] -> getPos();
+            
+            movimiento = ejercitoX.personajes[indice] -> moverse();
+            rastro = Posicion(ejercitoX.personajes[indice] -> posPrevia.getX(), ejercitoX.personajes[indice] -> posPrevia.getY());
 
-        // Necesario lo de abajo?
-        std::cout << "Turno " << indice << ": " << ejercitoX.personajes[indice] -> getNombre() << " Posicion: (" << ejercitoX.personajes[indice] -> getPos().getX() << ", " << ejercitoX.personajes[indice] -> getPos().getY() << ")" << std::endl;
-        Personaje *enemigo = llamarEnemigo(ejercitoX.personajes[indice] -> getPos(), ejercitoY);
+            Personaje *enemigo = llamarEnemigo(ejercitoX.personajes[indice] -> getPos(), ejercitoY);
 
-        if (enemigo){
-            if ((ejercitoX.personajes[indice] -> combatePendiente == 1) && (ejercitoX.personajes[indice] -> estado == "vivo") && (enemigo -> estado == "vivo")){
-                combate(ejercitoX.personajes[indice], enemigo);
+            if (enemigo){
+                if ((ejercitoX.personajes[indice] -> combatePendiente == 1) && (ejercitoX.personajes[indice] -> estado == "vivo") && (enemigo -> estado == "vivo")){
+                    combate(ejercitoX.personajes[indice], enemigo);
+                }
             }
+        
+        mostrarMapa();
         }
-    mostrarMapa();
     }
 }
 
@@ -93,6 +93,8 @@ void Juego::mostrarMapa() {
         std::cout << std::endl;
     }
     std::cout << std::endl;
+    separador();
+    
 }
 
 void Juego::combate(Personaje *ataca, Personaje *defiende) {
@@ -108,8 +110,8 @@ void Juego::combate(Personaje *ataca, Personaje *defiende) {
 }
 
 void Juego::combateDef(Personaje *p1, Personaje *p2) {
-    separador();
-    std::cout << "Comienza pelea entre " << p1 -> getNombre() << " y " << p2 -> getNombre() << ":" << std::endl;
+    std::cout << ">> Comienza pelea entre " << p1 -> getNombre() << " y " << p2 -> getNombre() << " <<" << std::endl;
+    std::cout << std::endl;
     std::cout << "La velocidad de " << p1 -> getNombre() << " es de " << p1 -> getVelocidad();
     std::cout << ", la de " << p2 -> getNombre() << " es de " << p2 -> getVelocidad();
     if (p1 -> getVelocidad() > p2 -> getVelocidad()) Juego::combateDes(p1, p2);
@@ -139,7 +141,6 @@ void Juego::combateDes(Personaje *primero, Personaje *segundo) {
     std::cout << "Combate finalizado, ha ganado ";
     if (primero -> getVida() > 0) std::cout << primero -> getNombre() << std::endl;
     else std::cout << segundo -> getNombre() << std::endl;
-    separador();
 }
 
 int Juego::getEstado() {
@@ -155,11 +156,9 @@ void Juego::setMapa(Mapa *tablero) {
 Personaje* Juego::llamarEnemigo(Posicion pos, Ejercito ejercitoRival) {
     for (int i = 0; i < ejercitoRival.getCantidad(); i++){
         if ((ejercitoRival.personajes[i] -> getPos().getX() == pos.getX()) && (ejercitoRival.personajes[i] -> getPos().getY() == pos.getY()) && (ejercitoRival.personajes[i] -> estado == "vivo")) {
-            std::cout << "Enemigo encontrado: " << ejercitoRival.personajes[i] -> getNombre() << std::endl;
             return ejercitoRival.personajes[i];
         }
     }
-    std::cout << "No se encontro ningun enemigo." << std::endl;
     return nullptr;
 }
 
@@ -172,6 +171,6 @@ void Juego::bienvenidaJuego() {
     int ancho = tablero -> getAncho();
     separador();
     for (int i = 0; i < (ancho + 1 / 2); i ++) std::cout << " ";
-    std::cout << "BIENVENIDO AL BATALLA MAS EPICA DE LA HISTORIA" << std::endl;
+    std::cout << "BIENVENIDO A LA BATALLA MAS EPICA DE LA HISTORIA" << std::endl;
     separador();
 }

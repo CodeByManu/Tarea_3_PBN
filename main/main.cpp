@@ -102,6 +102,11 @@ int main() {
         juego.calcularTurno();
     }
 
+    cout << " ----- EL VENCEDOR ES ... (Enter para revelar el misterio) -----";
+    cin.get();
+    if (juego.chequearGanador() == 1) cout << "¡¡EJERCITO 1!!" << endl;
+    else cout << "¡¡EJERCITO 2!!" << endl;
+
     for (int i = 0; i < n1; i++) delete ejercito1Aux[i];
     delete[] ejercito1Aux;
     for (int i = 0; i < n2; i++) delete ejercito2Aux[i];

@@ -33,7 +33,6 @@ void Mapa::agregarPersonaje(Personaje *personaje) {
 }
 
 void Mapa::eliminarPersonaje(Personaje* personaje) {
-    std::cout << personaje -> getNombre() << " ha sido eliminado (" << personaje -> getPos().getX() << ", " << personaje -> getPos().getY() << ")" << std::endl;
     tablero[personaje -> getPos().getX()][personaje -> getPos().getY()*2] = "     ";
     tablero[personaje -> getPos().getX()][personaje -> getPos().getY()*2 + 1] = "_____";
 }
